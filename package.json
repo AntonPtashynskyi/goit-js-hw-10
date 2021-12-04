@@ -1,0 +1,30 @@
+{
+  "name": "goit-js-hw-10",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "dev": "parcel src/index.html",
+    "build": "parcel build src/index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AntonPtashynskyi/goit-js-hw-10.git"
+  },
+  "keywords": [],
+  "author": "Anton <YOUR_EMAILH>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AntonPtashynskyi/goit-js-hw-10/issues"
+  },
+  "homepage": "https://github.com/AntonPtashynskyi/goit-js-hw-10#readme",
+  "devDependencies": {
+    "parcel": "^2.0.1",
+    "posthtml-include": "^1.7.2"
+  },
+  "dependencies": {
+    "@inventory/parcel-plugin-handlebars": "^1.0.0",
+    "handlebars": "^4.7.7",
+    "lodash.debounce": "^4.0.8",
+    "notiflix": "^3.2.2"
+  }
+}
