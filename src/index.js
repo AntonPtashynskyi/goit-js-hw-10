@@ -16,7 +16,7 @@ function onInput(e) {
 
   clearField();
 
-  if (inputtedValue === ' ' || inputtedValue.trim() === '') {
+  if (inputtedValue.trim() === '') {
     Notify.info('Input field must not be empty');
     return;
   }
