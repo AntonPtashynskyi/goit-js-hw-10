@@ -58,3 +58,7 @@ body {
   width: 180px;
   border-radius: 10px;
 }
+
+.text-accent {
+  font-weight: 500;
+}

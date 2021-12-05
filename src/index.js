@@ -5,16 +5,14 @@ import { fetchCountries } from './fetchCountries';
 
 const DEBOUNCE_DELAY = 300;
 
-export const refs = {
-  inputForm: document.querySelector('input#search-box'),
-  list: document.querySelector('.country-list'),
-  cardInfo: document.querySelector('.country-info'),
-};
+const inputForm = document.querySelector('input#search-box');
+const list = document.querySelector('.country-list');
+const cardInfo = document.querySelector('.country-info');
 
-refs.inputForm.addEventListener('input', debounce(onInput, DEBOUNCE_DELAY));
+inputForm.addEventListener('input', debounce(onInput, DEBOUNCE_DELAY));
 
 function onInput(e) {
-  const inputtedValue = refs.inputForm.value;
+  const inputtedValue = inputForm.value;
 
   clearField();
 
@@ -23,10 +21,52 @@ function onInput(e) {
     return;
   }
 
-  fetchCountries(inputtedValue);
+  fetchCountries(inputtedValue, renderCountries);
+}
+
+function renderCountries(countries) {
+  if (countries.length > 10) {
+    return Notify.warning(
+      'Too many matches found. Please enter a more specific name.'
+    );
+  }
+
+  if (countries.length === 10 || countries.length > 1) {
+    renderCountryList(countries);
+  }
+
+  if (countries.length === 1) {
+    renderCountryCard(countries[0]);
+  }
+}
+
+function renderCountryList(countries) {
+  list.innerHTML = countries
+    .map(
+      ({ name: { common }, flags: { svg } }) =>
+        `<li class="list-item"><img src="${svg}" alt="${common}" class="list-flag">${common}</li>`
+    )
+    .join('');
+}
+
+function renderCountryCard({
+  name: { common },
+  capital,
+  flags: { svg },
+  population,
+  languages,
+}) {
+  cardInfo.innerHTML = `
+    <img class="card-img" src="${svg}" alt="${common}">
+    <h2 class="country-name"><span class="text-accent" >Country:</span> ${common}</h2>
+    <p class="capital"><span class="text-accent" >Capital:</span> ${capital}</p>
+    <p class="population"><span class="text-accent" >Population:</span> ${population}</p>
+    <p class="languages"><span class="text-accent" >Languages:</span> ${Object.values(
+      languages
+    ).join(', ')}</p>`;
 }
 
 function clearField() {
-  refs.list.innerHTML = ' ';
-  refs.cardInfo.innerHTML = ' ';
+  list.innerHTML = ' ';
+  cardInfo.innerHTML = ' ';
 }
