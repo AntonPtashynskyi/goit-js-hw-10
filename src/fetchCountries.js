@@ -44,9 +44,12 @@ export function fetchCountries(name) {
             <p class="population">Population: ${population}</p>
             <p class="languages">Languages: ${Object.values(languages).join(
               ', '
-            )}</p>
-        `;
+            )}</p>`;
         }
       }
+      throw Notify.failure('Oops, there is no country with that name');
+    })
+    .catch((error) => {
+      console.log(error);
     });
 }
