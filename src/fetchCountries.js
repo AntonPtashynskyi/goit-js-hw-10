@@ -47,7 +47,10 @@ export function fetchCountries(name) {
             )}</p>`;
         }
       }
-      throw Notify.failure('Oops, there is no country with that name');
+
+      if (results.status === 404) {
+        throw Notify.failure('Oops, there is no country with that name');
+      }
     })
     .catch((error) => {
       console.log(error);
